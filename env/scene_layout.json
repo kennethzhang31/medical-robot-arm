@@ -1,5 +1,7 @@
 {
   "hospital_asset": "hospital_isaac.usdz",
+  "cloth_material": "new_env_reference_cloth_v1",
+  "display_new_instruments": true,
   "selected_table": "Table_04",
   "table_center_xy": [0.15, 0.0],
   "table_yaw_deg": 90.0,

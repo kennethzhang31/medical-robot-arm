@@ -35,7 +35,10 @@ def write_run_manifest(object_name, forwarded_args):
     files = [ROOT/'record.py', ROOT/'env'/'scene_layout.json',
              ROOT/'env'/'camera_layout.json',
              ROOT/'env'/'instrument_preview_geometry.json',
+             ROOT/'assets'/'blender_normals'/'love_retractor.usda',
              ROOT/'assets'/LAYOUT['hospital_asset']]
+    files.extend(sorted((ROOT/'assets'/'blender_microfiber').glob('*')))
+    files.extend(p for p in sorted((ROOT/'assets'/'new_environment').rglob('*')) if p.is_file())
     files.extend(sorted((ROOT/'backends').glob('*recorder.py')))
     files.extend(sorted((ROOT/'src').rglob('*.py')))
     files.extend(sorted((ROOT/'env').glob('*.py')))
@@ -61,6 +64,10 @@ def write_run_manifest(object_name, forwarded_args):
         'camera_contract': (json.loads(Path(os.environ['P4_RESUME_CAMERA_MANIFEST']).read_text(encoding='utf-8')).get('camera_contract','native_square_wide_table_v2')
                             if os.environ.get('P4_RESUME_CAMERA_MANIFEST') else 'native_square_front_work_v3'),
         'render_contract': 'native_fxaa_no_frame_generation_4spp_v2',
+        'material_contract': 'matched_satin_steel_new_env_cloth_v6' if LAYOUT.get('cloth_material') else 'matched_satin_steel_microfiber_drape_v5',
+        'cloth_material_contract': LAYOUT.get('cloth_material', 'blender_microfiber_v2'),
+        'display_instruments': 'eight_static_satin_tools_on_Table_03' if LAYOUT.get('display_new_instruments') else None,
+        'visual_normals_contract': 'blender_weighted_retractor_normals_v1',
         'camera_size': int(os.environ.get('P4_CAMERA_SIZE', '448')),
         'randomization': os.environ.get('P4_RANDOMIZATION', 'train'),
         'randomization_seed': int(os.environ.get('P4_RANDOMIZATION_SEED', '17')),
@@ -182,6 +189,17 @@ def spawn_hospital(prim_path, cfg, translation=None, orientation=None, **kwargs)
             label(child, 'table')
         elif 'floor' in child.GetName().lower():
             label(child, 'floor')
+    from src.recorder.domain_randomization import apply_background
+    if LAYOUT.get('cloth_material') == 'new_env_reference_cloth_v1':
+        from env.new_environment import apply_cloth_materials
+        apply_cloth_materials(prim)
+    if LAYOUT.get('display_new_instruments'):
+        from env.new_environment import ASSET_DIR
+        from pxr import UsdGeom
+        display = UsdGeom.Xform.Define(prim.GetStage(), prim.GetPath().AppendChild('NewInstrumentDisplay'))
+        display.GetPrim().GetReferences().AddReference(str(ASSET_DIR / 'instruments.usda'))
+    apply_background(prim.GetStage(), LAYOUT,
+                     dict(color=[0.045, 0.24, 0.13], roughness=0.82), root=prim)
     return prim
 
 
@@ -200,7 +218,10 @@ def spawn_centered_tray(prim_path, cfg, translation=None, orientation=None, **kw
     t[0] -= c*x-s*y
     t[1] -= s*x+c*y
     print('[P4 TRAY] center=', translation, 'asset root=', t, flush=True)
-    return spawn_from_usd(prim_path, cfg, translation=tuple(t), orientation=orientation, **kwargs)
+    prim = spawn_from_usd(prim_path, cfg, translation=tuple(t), orientation=orientation, **kwargs)
+    from env.instrument_materials import tune_steel_materials
+    tune_steel_materials(prim, minimum_roughness=0.40)
+    return prim
 
 
 def spawn_sensor_safe_light(prim_path, cfg, translation=None, orientation=None, **kwargs):
@@ -252,9 +273,7 @@ def apply_scene(env_cfg):
     env_cfg.scene.shared_surgical_tray.spawn.scale = tray_scale_for_layout(env_cfg.scene.shared_surgical_tray.spawn.usd_path)
     for name in ('shared_key_light', 'shared_fill_light'):
         getattr(env_cfg.scene, name).spawn.func = spawn_sensor_safe_light
-    # P4-only exposure correction. Authored instrument materials remain intact;
-    # the shared asset config adds a brushed-steel fallback only to the scissor
-    # source mesh, which has no material binding of its own.
+    # Keep illumination fixed while tuning the steel finishes and woven drape.
     for name, intensity in LAYOUT.get('lighting', {}).items():
         if name not in ('shared_ambient_light','shared_key_light','shared_fill_light'):
             raise ValueError(f'Unsupported P4 light: {name}')
@@ -262,7 +281,7 @@ def apply_scene(env_cfg):
             raise ValueError(f'Invalid light intensity: {name}={intensity}')
         getattr(env_cfg.scene, name).spawn.intensity = float(intensity)
     print('[P4 LIGHTING] shared intensities=', LAYOUT.get('lighting', {}),
-          'authored materials preserved; scissor fallback active', flush=True)
+          'satin steel finishes; textured woven drape active', flush=True)
     # The imported floor is below table Z=0. Keep task ground at that floor.
     if getattr(env_cfg.scene, "ground", None) is not None:
         env_cfg.scene.ground.init_state.pos = (0.,0.,g["room_pos"][2]-0.01)

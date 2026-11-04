@@ -1,0 +1,9 @@
+# Only the imports used by ASPIRE's BaseEnv, ApiBase and CodeExecutionEnvBase.
+# Install into a dedicated test venv, or with --no-deps into a compatible Isaac
+# runtime after preflight. Do not install ASPIRE's full pyproject into IsaacLab.
+gymnasium==0.29.1
+omegaconf==2.3.0
+cloudpickle>=2.2,<4
+PyYAML>=6,<7
+Pillow>=10,<12
+numpy>=1.26,<2

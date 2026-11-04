@@ -1,0 +1,39 @@
+{
+  "contract": "blender_microfiber_v2",
+  "texture_size": [
+    512,
+    512
+  ],
+  "tile_metres": 0.012,
+  "uv_metres": [
+    3.26709,
+    2.07803
+  ],
+  "uv_repeats": [
+    272.2575,
+    173.16916666666665
+  ],
+  "height_metres": 0.00012,
+  "bump_strength": 0.65,
+  "roughness_weight": 0.3,
+  "roughness_mean": 0.8399999737739563,
+  "reference_sha256": "d4d511356c0230cecd4758910068fffa4197a2e6c8e2844bbb519763fbab8466",
+  "reference_crop_normalized": [
+    0.71875,
+    0.05188067444876784,
+    0.90625,
+    0.24643320363164722
+  ],
+  "source_file": "exports/blender_shading_20261026/shading_applied.blend",
+  "source_hospital_sha256": "46c4c5e5dea230644c52267024972d5152ad8a72d142ae168a4ddf3b6c711c2f",
+  "geometry": "Unchanged points, topology, UVs, transforms; shader bump only",
+  "material": "Photo-derived irregular microfiber tufts, green recolour, original crease normals retained",
+  "limitations": "Photo luminance approximates height; scale estimated without a ruler. No individual fibre geometry or fuzzy silhouette.",
+  "asset_sha256": {
+    "basecolor.png": "09351d394404c91a3a220a56fb747898d91ffb52eda7540fe46bc032c4c92225",
+    "drape_creases_normal.png": "958037866571f15e0fb5b3cdb78fc0c42ccbd495e6888c22498142252d2b73ce",
+    "normal.png": "069ae8b4a0e7adac9e550b40c00b76d08da97e3b7841d0f92050d833ed370d41",
+    "roughness.png": "993ae3906b28b1fa224e0c4ea773ba4ee07a99f92935feba252eb9c7196fe8ff"
+  },
+  "source_scene": "03 Instrument Finish Comparison"
+}

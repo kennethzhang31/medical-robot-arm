@@ -1,0 +1,62 @@
+#usda 1.0
+(
+    defaultPrim = "Asset"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "Asset" (
+    customData = {
+        string steelMaterialContract = "matched_satin_steel_v1"
+    }
+    prepend references = @source/Scalpel_Handle_No3.usd@
+)
+{
+    over "Geometry" (
+        instanceable = false
+    )
+    {
+        over "_materials"
+        {
+            over "Scalpel_Handle_No3__Metal_body"
+            {
+                over "Principled_BSDF"
+                {
+                    color3f inputs:diffuseColor = (0.48, 0.5, 0.52)
+                    color3f inputs:diffuseColor.connect = None
+                    float inputs:metallic = 0.95
+                    float inputs:roughness = 0.52
+                }
+            }
+
+            over "Scalpel_Handle_No3__Metal_polished"
+            {
+                over "Principled_BSDF"
+                {
+                    color3f inputs:diffuseColor = (0.48, 0.5, 0.52)
+                    color3f inputs:diffuseColor.connect = None
+                    float inputs:metallic = 0.95
+                    float inputs:roughness = 0.52
+                }
+            }
+
+            over "Scalpel_Handle_No3__Metal_recess"
+            {
+                over "Principled_BSDF"
+                {
+                    color3f inputs:diffuseColor = (0.48, 0.5, 0.52)
+                    color3f inputs:diffuseColor.connect = None
+                    float inputs:metallic = 0.95
+                    float inputs:roughness = 0.52
+                }
+            }
+        }
+    }
+
+    over "Collision" (
+        instanceable = false
+    )
+    {
+    }
+}
+

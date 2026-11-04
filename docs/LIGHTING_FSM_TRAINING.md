@@ -1,5 +1,8 @@
 # P4 lighting / FSM revision — 2026-09-14
 
+Current material tuning is documented in [Simulation material realism](SIMULATION_REALISM.md).
+The material-preservation notes below describe the earlier lighting revision.
+
 ## Implemented, P4 only
 
 `scene_layout.json` owns lighting and the FSM feature switch. All five backend

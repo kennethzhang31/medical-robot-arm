@@ -20,6 +20,7 @@ class InstrumentMaterialContractTests(unittest.TestCase):
         self.assertGreater(material.metallic, 0.5)
         self.assertGreaterEqual(material.roughness, 0.25)
         self.assertLessEqual(material.roughness, 0.6)
+        self.assertAlmostEqual(material.roughness, 0.52)
 
 
 if __name__ == "__main__":

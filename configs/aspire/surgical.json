@@ -1,0 +1,19 @@
+{
+  "contract": "surgical_aspire_v1",
+  "development_seeds": [101, 102, 103, 104, 105],
+  "evaluation_seeds": [1, 2, 3, 4, 5],
+  "task": {
+    "target": "scissor",
+    "camera_size": 448,
+    "max_steps": 2400,
+    "tray_mode": "empty",
+    "distractor_min": 4,
+    "distractor_max": 4,
+    "randomization": "off",
+    "video_stride": 4,
+    "sam3_url": null,
+    "perception_backend": "rfdetr",
+    "rfdetr_url": "http://127.0.0.1:8115",
+    "motion_timeout_s": 8.0
+  }
+}

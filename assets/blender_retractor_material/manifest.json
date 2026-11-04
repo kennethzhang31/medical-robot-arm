@@ -1,0 +1,19 @@
+{
+  "source_blend": "exports/instrument_finish_20261025/instrument_finish.blend",
+  "source_blend_sha256": "844c8bd61ababf9e40366ab15bd4bc24cdffa3601e55b2a99a7c0e79a9f15994",
+  "source_scene": "03 Instrument Finish Comparison",
+  "source_object": "Object_62.002",
+  "source_material": "instrumenty.008",
+  "blender_version": "5.2.2 LTS",
+  "shader": "UsdPreviewSurface",
+  "settings": {
+    "diffuseColor": [
+      0.47999998927116394,
+      0.5,
+      0.5199999809265137
+    ],
+    "metallic": 0.949999988079071,
+    "roughness": 0.5199999809265137
+  },
+  "material_sha256": "37bc1417d4a6dbbdd6be1619e21f562a3e292bd7bd1f73789130183c5ff01e6f"
+}

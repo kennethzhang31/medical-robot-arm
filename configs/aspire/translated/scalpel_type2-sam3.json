@@ -1,0 +1,31 @@
+{
+  "contract": "surgical_aspire_v1",
+  "development_seeds": [
+    501,
+    502,
+    503,
+    504,
+    505
+  ],
+  "evaluation_seeds": [
+    601,
+    602,
+    603,
+    604,
+    605
+  ],
+  "task": {
+    "target": "scalpel_type2",
+    "camera_size": 448,
+    "max_steps": 2400,
+    "tray_mode": "empty",
+    "distractor_min": 4,
+    "distractor_max": 4,
+    "randomization": "off",
+    "video_stride": 4,
+    "sam3_url": "http://127.0.0.1:8114",
+    "perception_backend": "sam3",
+    "rfdetr_url": null,
+    "motion_timeout_s": 8.0
+  }
+}

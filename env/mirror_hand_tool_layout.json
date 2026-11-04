@@ -1,0 +1,11 @@
+{
+  "source": "logs/new_env_render_20261028/gui_matched_steel_studio.log",
+  "note": "Last hospital preview: logged XY, including final cell recentering; yaw is logged to 0.1 degree.",
+  "positions": {
+    "scalpel": {"x": 0.4148649588114458, "y": 0.20761582396574024, "yaw_deg": 30.4},
+    "scissor": {"x": 0.22, "y": -0.3924, "yaw_deg": 292.9},
+    "love_retractor": {"x": 0.42, "y": -0.3924, "yaw_deg": 74.5},
+    "kelly": {"x": 0.42, "y": -0.1924, "yaw_deg": 8.4},
+    "scalpel_type2": {"x": 0.4269468830338636, "y": 0.012422820014058525, "yaw_deg": 65.2}
+  }
+}

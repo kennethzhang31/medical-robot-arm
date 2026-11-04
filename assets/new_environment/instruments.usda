@@ -1,0 +1,2483 @@
+#usda 1.0
+(
+    defaultPrim = "Instruments"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "Instruments"
+{
+    def Xform "Allis_Tissue_Forceps" (
+        prepend references = @Allis_Tissue_Forceps.usda@
+    )
+    {
+        bool physics:rigidBodyEnabled = 0
+        double3 xformOp:translate = (-2.78, 3.44, 0.91)
+
+        over "Collision"
+        {
+            over "convex_000"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_001"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_002"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_003"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_004"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_005"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_006"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_007"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_008"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_009"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_010"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_011"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_012"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_013"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_014"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_015"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_016"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_017"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_018"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_019"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_020"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_021"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_022"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_023"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_024"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_025"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_026"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_027"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_028"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_029"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_030"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_031"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_032"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_033"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_034"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_035"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_036"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_037"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_038"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_039"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_040"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_041"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_042"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_043"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_044"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_045"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_046"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_047"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_048"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_049"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_050"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_051"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_052"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_053"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_054"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_055"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_056"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_057"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_058"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_059"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_060"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_061"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_062"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_063"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_064"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_065"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_066"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_067"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_068"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_069"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_070"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_071"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_072"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_073"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_074"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_075"
+            {
+                bool physics:collisionEnabled = 0
+            }
+        }
+    }
+
+    def Xform "Brown_Tissue_Forceps" (
+        prepend references = @Brown_Tissue_Forceps.usda@
+    )
+    {
+        bool physics:rigidBodyEnabled = 0
+        double3 xformOp:translate = (-2.46, 3.44, 0.91)
+
+        over "Collision"
+        {
+            over "convex_000"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_001"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_002"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_003"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_004"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_005"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_006"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_007"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_008"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_009"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_010"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_011"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_012"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_013"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_014"
+            {
+                bool physics:collisionEnabled = 0
+            }
+        }
+    }
+
+    def Xform "CrileWood_Needle_Holder_Closed" (
+        prepend references = @CrileWood_Needle_Holder_Closed.usda@
+    )
+    {
+        bool physics:rigidBodyEnabled = 0
+        double3 xformOp:translate = (-2.1399999999999997, 3.44, 0.91)
+
+        over "Collision"
+        {
+            over "convex_000"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_001"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_002"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_003"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_004"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_005"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_006"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_007"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_008"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_009"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_010"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_011"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_012"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_013"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_014"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_015"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_016"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_017"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_018"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_019"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_020"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_021"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_022"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_023"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_024"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_025"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_026"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_027"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_028"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_029"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_030"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_031"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_032"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_033"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_034"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_035"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_036"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_037"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_038"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_039"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_040"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_041"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_042"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_043"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_044"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_045"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_046"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_047"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_048"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_049"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_050"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_051"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_052"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_053"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_054"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_055"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_056"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_057"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_058"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_059"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_060"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_061"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_062"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_063"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_064"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_065"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_066"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_067"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_068"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_069"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_070"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_071"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_072"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_073"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_074"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_075"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_076"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_077"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_078"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_079"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_080"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_081"
+            {
+                bool physics:collisionEnabled = 0
+            }
+        }
+    }
+
+    def Xform "Derf_Needle_Holder_Closed" (
+        prepend references = @Derf_Needle_Holder_Closed.usda@
+    )
+    {
+        bool physics:rigidBodyEnabled = 0
+        double3 xformOp:translate = (-1.8199999999999998, 3.44, 0.91)
+
+        over "Collision"
+        {
+            over "convex_000"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_001"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_002"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_003"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_004"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_005"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_006"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_007"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_008"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_009"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_010"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_011"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_012"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_013"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_014"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_015"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_016"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_017"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_018"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_019"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_020"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_021"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_022"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_023"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_024"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_025"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_026"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_027"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_028"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_029"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_030"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_031"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_032"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_033"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_034"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_035"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_036"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_037"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_038"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_039"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_040"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_041"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_042"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_043"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_044"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_045"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_046"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_047"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_048"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_049"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_050"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_051"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_052"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_053"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_054"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_055"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_056"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_057"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_058"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_059"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_060"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_061"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_062"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_063"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_064"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_065"
+            {
+                bool physics:collisionEnabled = 0
+            }
+        }
+    }
+
+    def Xform "Mayo_Scissors_Straight" (
+        prepend references = @Mayo_Scissors_Straight.usda@
+    )
+    {
+        bool physics:rigidBodyEnabled = 0
+        double3 xformOp:translate = (-2.78, 3.6599999999999997, 0.91)
+
+        over "Collision"
+        {
+            over "convex_000"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_001"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_002"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_003"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_004"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_005"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_006"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_007"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_008"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_009"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_010"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_011"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_012"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_013"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_014"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_015"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_016"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_017"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_018"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_019"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_020"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_021"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_022"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_023"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_024"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_025"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_026"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_027"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_028"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_029"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_030"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_031"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_032"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_033"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_034"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_035"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_036"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_037"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_038"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_039"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_040"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_041"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_042"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_043"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_044"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_045"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_046"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_047"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_048"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_049"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_050"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_051"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_052"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_053"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_054"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_055"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_056"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_057"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_058"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_059"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_060"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_061"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_062"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_063"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_064"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_065"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_066"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_067"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_068"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_069"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_070"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_071"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_072"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_073"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_074"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_075"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_076"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_077"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_078"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_079"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_080"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_081"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_082"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_083"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_084"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_085"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_086"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_087"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_088"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_089"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_090"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_091"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_092"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_093"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_094"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_095"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_096"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_097"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_098"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_099"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_100"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_101"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_102"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_103"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_104"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_105"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_106"
+            {
+                bool physics:collisionEnabled = 0
+            }
+        }
+    }
+
+    def Xform "Metzenbaum_Scissors_Curved" (
+        prepend references = @Metzenbaum_Scissors_Curved.usda@
+    )
+    {
+        bool physics:rigidBodyEnabled = 0
+        double3 xformOp:translate = (-2.46, 3.6599999999999997, 0.91)
+
+        over "Collision"
+        {
+            over "convex_000"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_001"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_002"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_003"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_004"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_005"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_006"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_007"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_008"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_009"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_010"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_011"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_012"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_013"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_014"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_015"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_016"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_017"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_018"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_019"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_020"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_021"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_022"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_023"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_024"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_025"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_026"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_027"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_028"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_029"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_030"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_031"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_032"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_033"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_034"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_035"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_036"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_037"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_038"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_039"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_040"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_041"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_042"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_043"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_044"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_045"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_046"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_047"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_048"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_049"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_050"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_051"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_052"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_053"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_054"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_055"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_056"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_057"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_058"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_059"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_060"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_061"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_062"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_063"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_064"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_065"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_066"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_067"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_068"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_069"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_070"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_071"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_072"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_073"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_074"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_075"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_076"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_077"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_078"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_079"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_080"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_081"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_082"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_083"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_084"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_085"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_086"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_087"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_088"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_089"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_090"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_091"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_092"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_093"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_094"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_095"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_096"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_097"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_098"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_099"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_100"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_101"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_102"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_103"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_104"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_105"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_106"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_107"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_108"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_109"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_110"
+            {
+                bool physics:collisionEnabled = 0
+            }
+        }
+    }
+
+    def Xform "Ragnell_Retractor" (
+        prepend references = @Ragnell_Retractor.usda@
+    )
+    {
+        bool physics:rigidBodyEnabled = 0
+        double3 xformOp:translate = (-2.1399999999999997, 3.6599999999999997, 0.91)
+
+        over "Collision"
+        {
+            over "convex_000"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_001"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_002"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_003"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_004"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_005"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_006"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_007"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_008"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_009"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_010"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_011"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_012"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_013"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_014"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_015"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_016"
+            {
+                bool physics:collisionEnabled = 0
+            }
+        }
+    }
+
+    def Xform "Scalpel_Handle_No3" (
+        prepend references = @Scalpel_Handle_No3.usda@
+    )
+    {
+        bool physics:rigidBodyEnabled = 0
+        double3 xformOp:translate = (-1.8199999999999998, 3.6599999999999997, 0.91)
+
+        over "Collision"
+        {
+            over "convex_000"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_001"
+            {
+                bool physics:collisionEnabled = 0
+            }
+
+            over "convex_002"
+            {
+                bool physics:collisionEnabled = 0
+            }
+        }
+    }
+}
+

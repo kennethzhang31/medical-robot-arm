@@ -54,3 +54,9 @@ service-account*.json
 /docs/history/
 /scripts/tools/verify_migration.py
 /compat/verify_migration.py
+# Local integration dependencies and generated ASPIRE trial artifacts.
+.local/
+aspire_runs/
+/logs/
+/exports/
+/Screenshot*.png

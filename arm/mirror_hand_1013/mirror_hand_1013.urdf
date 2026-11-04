@@ -1,0 +1,702 @@
+<?xml version="1.0"?>
+<!--
+  robot: mirror_hand_1013
+  consumers: CAD Viewer / robot_state_publisher; source for the enclosed-hand USD
+  units: metres, kilograms, seconds, radians; mesh source units: millimetres
+  root: palm_link at the existing Right_Hand_0816.iam root origin, right-handed
+  frame exception: existing Inventor assembly axes retained; no REP-103 remapping
+  source: urdf_axes/current_geometry.json, joint_axes.json, fourbar_geometry.json;
+          Current_Assembly.step plus Palm_Cover.step and Dorsal_Cover.step
+  canonical artifact: this directly authored XML; no URDF regeneration pipeline
+
+  Link ledger (all 23 links are physical; all mesh origins are identity):
+  - palm_link: root; fixed hand plate, finger frames, motor cases and fasteners.
+  - fingerN_gimbal_link: N=1..5; origin measured P0, axes of current Gimbal.ipt;
+    child of fingerN_abduction_joint; contains the corresponding gimbal.
+  - fingerN_proximal_link: P0 with same zero axes; child of fingerN_flexion_joint;
+    contains Proximal, Proximal_Shell and assigned rigid fasteners.
+  - fingerN_distal_link: P2 with same zero axes; child of fingerN_distal_joint;
+    contains Distal, Distal_Shell and assigned rigid fasteners.
+  - fingerN_link_link: P1 with same zero axes; child of fingerN_link_joint;
+    contains the independent four-bar Link and assigned rigid fasteners.
+  - palm_cover_link / dorsal_cover_link: assembly-root frame; fixed to palm_link;
+    latest two-piece simple-oval palm enclosure.
+  - Geometry: meshes/LINK_NAME.stl, exported directly into the owning link frame;
+    visual and collision share identity origins and scale 0.001 0.001 0.001.
+  - Inertial source: asset_manifest.json, CAD solid mass-property integration;
+    COM in link coordinates, full inertia about COM aligned with link axes.
+
+  Joint ledger:
+  - fingerN_abduction_joint: palm to gimbal, measured assembly centre/rpy;
+    axis +Z of measured gimbal; positive follows the right-hand rule.
+    Outward/inward naming and motor signs have not been calibrated.
+  - fingerN_flexion_joint: gimbal to proximal at P0, axis local -X;
+    positive reduces the proximal YZ-plane angle and bends the finger.
+  - fingerN_distal_joint: proximal to distal at P2, passive axis local -X.
+  - fingerN_link_joint: gimbal to Link at P1=(0,0,-0.006), passive axis local -X.
+  - Covers use fixed identity joints. Joint zero is the current CAD pose,
+    not an independently calibrated motor-zero or straight-finger pose.
+
+  Mechanism ledger:
+  - Five fingers, two commanded OUTPUT coordinates per finger: 10 commanded DoF.
+  - This plain URDF is a tree with 20 rotary joints. Five Link-to-Distal closure
+    hinges at P3 MUST be added by the USD workflow to enforce the actual mechanism.
+  - Measured four-bar lengths: P0-P2=52, P1-P3=50.5, P2-P3=6, P0-P1=6 mm.
+  - No linear mimic is specified: distal coupling is nonlinear. For tree/viewer
+    poses use tools/pose_fourbar.py; fourbar_geometry.json records closure frames.
+  - Servo horns and ball rods are omitted from this reduced output-coordinate
+    model. Motor cases remain fixed. Direct root actuation replaces their drive
+    mapping; this is not a simulation of the full two-servo ball-link mechanism.
+
+  Assumptions and provisional parameters:
+  - Uniform density 1200 kg/m^3 for every CAD solid, including mixed materials;
+    mass and inertia are estimates, not weighed/calibrated hardware parameters.
+  - Small fasteners are assigned to the nearest principal-part bounding volume
+    (AABB distance, centre-distance tie break); this approximates rigid ownership,
+    including at shared pin axes. Principal-part membership is explicit.
+  - Limits updated 2026-10-13 from the user's dimensioned mechanism image:
+    abduction [-20,+20] deg, proximal flexion [0,86] deg, distal [0,80] deg.
+    Applied to all five fingers, taking the existing open CAD pose as zero;
+    motor-zero calibration is still independent. Effort 0.25 N m and velocity
+    1 rad/s remain provisional. The pictured 6, 13.5 and lower 20 deg installation
+    angles do not replace the measured assembly transforms.
+  - Distal remains passive: at proximal 86 deg the current CAD four-bar yields
+    approximately 71.2405 deg distal. An 80 deg stop is not a mimic target.
+    The passive Link hinge retains [-pi,pi], effort 0, velocity 2 rad/s.
+    USD closures, not an extra passive drive, determine passive motion.
+  - Drive gains are external to this URDF.
+  - Collision meshes match visuals here. USD must select an appropriate explicit
+    convex decomposition; triangle meshes are not certified dynamic colliders.
+-->
+<robot name="mirror_hand_1013">
+  <link name="palm_link">
+    <inertial>
+      <origin xyz="-0.000694077714000796 -0.0215045433608488 -0.0161016327981988" rpy="0 0 0" />
+      <mass value="0.16906005944073" />
+      <inertia ixx="0.000178781354033394" ixy="1.27729034403993e-07" ixz="-4.00161273676476e-06" iyy="0.000127409222938007" iyz="-4.79792027957117e-05" izz="0.000227562332110764" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/palm_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="palm_dark" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/palm_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="finger1_gimbal_link">
+    <inertial>
+      <origin xyz="5.0939352716095e-06 -4.64166461390726e-14 0.001448419549327" rpy="0 0 0" />
+      <mass value="0.00117941879307791" />
+      <inertia ixx="3.82514446796197e-08" ixy="-6.46072501670641e-23" ixz="8.70193519970635e-12" iyy="4.21849474873592e-08" iyz="-6.52330536765974e-23" izz="1.56439390837966e-08" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger1_gimbal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="gimbal_grey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger1_gimbal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="finger1_proximal_link">
+    <inertial>
+      <origin xyz="2.47113212989326e-05 0.028220316585609 0.0031383181199465" rpy="0 0 0" />
+      <mass value="0.012787886498461" />
+      <inertia ixx="2.55155961796407e-06" ixy="-1.86179421078354e-09" ixz="-7.39337819337863e-10" iyy="9.17000645952452e-07" iyz="2.99800488911561e-08" izz="2.6624839044732e-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger1_proximal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="finger_ivory" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger1_proximal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="finger1_distal_link">
+    <inertial>
+      <origin xyz="-8.64396339643129e-06 0.0188279274750871 0.000238500643579609" rpy="0 0 0" />
+      <mass value="0.00862262340948851" />
+      <inertia ixx="1.19814975863528e-06" ixy="1.84654037878773e-09" ixz="2.94119034687195e-09" iyy="4.28720535358307e-07" iyz="1.72083337355592e-07" izz="1.18312713006894e-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger1_distal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="finger_ivory" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger1_distal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="finger1_link_link">
+    <inertial>
+      <origin xyz="-1.65525447241155e-14 0.0202717386557014 0.00367131094966079" rpy="0 0 0" />
+      <mass value="0.00187124423452587" />
+      <inertia ixx="5.38793499595286e-07" ixy="2.04333107565927e-20" ixz="5.66805854384292e-21" iyy="5.70394422952487e-08" iyz="-1.33294106372443e-07" izz="4.90750260860076e-07" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger1_link_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="link_metal" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger1_link_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="finger2_gimbal_link">
+    <inertial>
+      <origin xyz="5.09393526749884e-06 3.8480853104501e-14 0.001448419549327" rpy="0 0 0" />
+      <mass value="0.00117941879307791" />
+      <inertia ixx="3.82514446796197e-08" ixy="-1.13582178777453e-19" ixz="8.70193519965582e-12" iyy="4.21849474873592e-08" iyz="1.77598354982568e-22" izz="1.56439390837966e-08" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger2_gimbal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="gimbal_grey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger2_gimbal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="finger2_proximal_link">
+    <inertial>
+      <origin xyz="2.4711320481163e-05 0.0282203165856944 0.00313831811994692" rpy="0 0 0" />
+      <mass value="0.012787886498461" />
+      <inertia ixx="2.55155961796418e-06" ixy="-1.86179416365171e-09" ixz="-7.39337820202387e-10" iyy="9.17000645952343e-07" iyz="2.99800488911055e-08" izz="2.66248390447321e-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger2_proximal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="finger_ivory" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger2_proximal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="finger2_distal_link">
+    <inertial>
+      <origin xyz="-8.64396388895098e-06 0.0188279274750628 0.000238500643584426" rpy="0 0 0" />
+      <mass value="0.00862262340948851" />
+      <inertia ixx="1.19814975863517e-06" ixy="1.84654040096444e-09" ixz="2.94119034190788e-09" iyy="4.28720535358343e-07" iyz="1.72083337355524e-07" izz="1.18312713006902e-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger2_distal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="finger_ivory" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger2_distal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="finger2_link_link">
+    <inertial>
+      <origin xyz="-6.0514195607965e-13 0.020271738655786 0.00367131094966108" rpy="0 0 0" />
+      <mass value="0.00187124423452587" />
+      <inertia ixx="5.38793499595287e-07" ixy="1.39093105496554e-17" ixz="3.8484952541724e-18" iyy="5.70394422952513e-08" iyz="-1.33294106372448e-07" izz="4.90750260860075e-07" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger2_link_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="link_metal" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger2_link_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="finger3_gimbal_link">
+    <inertial>
+      <origin xyz="5.09393528066907e-06 -3.82128474479349e-14 0.001448419549327" rpy="0 0 0" />
+      <mass value="0.00117941879307791" />
+      <inertia ixx="3.82514446796197e-08" ixy="-1.66349102562877e-19" ixz="8.70193519966381e-12" iyy="4.21849474873593e-08" iyz="2.63413541442819e-22" izz="1.56439390837966e-08" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger3_gimbal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="gimbal_grey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger3_gimbal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="finger3_proximal_link">
+    <inertial>
+      <origin xyz="9.91288396478883e-07 0.0281998777417802 0.00315964837916238" rpy="0 0 0" />
+      <mass value="0.012723938346774" />
+      <inertia ixx="2.51579229777635e-06" ixy="-8.10560909025883e-09" ixz="-4.65845348349242e-09" iyy="9.08956554167491e-07" iyz="3.80785183598849e-08" izz="2.62770532775683e-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger3_proximal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="finger_ivory" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger3_proximal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="finger3_distal_link">
+    <inertial>
+      <origin xyz="-8.79249659695256e-06 0.0187362284337124 0.000261249332185664" rpy="0 0 0" />
+      <mass value="0.00866013629611312" />
+      <inertia ixx="1.2159058087334e-06" ixy="1.83250614862142e-09" ixz="2.94714937514151e-09" iyy="4.30093208620427e-07" iyz="1.76270871291591e-07" izz="1.20013153888654e-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger3_distal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="finger_ivory" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger3_distal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="finger3_link_link">
+    <inertial>
+      <origin xyz="0.000137832283294902 0.0200738398942858 0.00356743651828899" rpy="0 0 0" />
+      <mass value="0.00189345523538071" />
+      <inertia ixx="5.46819000215059e-07" ixy="4.35122378732211e-09" ixz="2.28389956769817e-09" iyy="6.18241491209084e-08" iyz="-1.36573315574381e-07" izz="5.00061215144106e-07" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger3_link_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="link_metal" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger3_link_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="finger4_gimbal_link">
+    <inertial>
+      <origin xyz="5.09393530899989e-06 2.79199517598965e-14 0.00144841954930377" rpy="0 0 0" />
+      <mass value="0.00117941879307791" />
+      <inertia ixx="3.82514446796197e-08" ixy="1.14952595025255e-19" ixz="8.70193519965055e-12" iyy="4.21849474873593e-08" iyz="-3.59329516454386e-22" izz="1.56439390837966e-08" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger4_gimbal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="gimbal_grey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger4_gimbal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="finger4_proximal_link">
+    <inertial>
+      <origin xyz="9.91290441510145e-07 0.0281998777418465 0.00315964837913959" rpy="0 0 0" />
+      <mass value="0.012723938346774" />
+      <inertia ixx="2.51579229777519e-06" ixy="-8.10560920517038e-09" ixz="-4.6584534807694e-09" iyy="9.0895655416865e-07" iyz="3.80785183601968e-08" izz="2.62770532775685e-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger4_proximal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="finger_ivory" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger4_proximal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="finger4_distal_link">
+    <inertial>
+      <origin xyz="-0.00056461992755 0.0190128988665321 0.000296388037932512" rpy="0 0 0" />
+      <mass value="0.00881428373113629" />
+      <inertia ixx="1.26713367898005e-06" ixy="1.51700971391893e-08" ixz="4.93701142904096e-09" iyy="4.25898838808002e-07" iyz="1.52766190793525e-07" izz="1.26205890760496e-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger4_distal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="finger_ivory" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger4_distal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="finger4_link_link">
+    <inertial>
+      <origin xyz="0.000137832284758769 0.0200738398943425 0.00356743651826617" rpy="0 0 0" />
+      <mass value="0.00189345523538071" />
+      <inertia ixx="5.46819000215681e-07" ixy="4.35122375263774e-09" ixz="2.28389955793118e-09" iyy="6.18241491202888e-08" iyz="-1.36573315574549e-07" izz="5.00061215144102e-07" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger4_link_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="link_metal" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger4_link_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="finger5_gimbal_link">
+    <inertial>
+      <origin xyz="5.0939352950011e-06 1.7279548040869e-14 0.00144841954937302" rpy="0 0 0" />
+      <mass value="0.00117941879307791" />
+      <inertia ixx="3.82514446796197e-08" ixy="-1.14932376137477e-19" ixz="8.70193519956013e-12" iyy="4.21849474873592e-08" iyz="2.09980536378122e-22" izz="1.56439390837966e-08" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger5_gimbal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="gimbal_grey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger5_gimbal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="finger5_proximal_link">
+    <inertial>
+      <origin xyz="4.73978936109067e-05 0.0281996074203907 0.00315963022435419" rpy="0 0 0" />
+      <mass value="0.0127320988789266" />
+      <inertia ixx="2.5166757016539e-06" ixy="4.78980192776922e-09" ixz="3.05090967510771e-09" iyy="9.09266594189881e-07" iyz="3.83056065116529e-08" izz="2.62834629136802e-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger5_proximal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="finger_ivory" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger5_proximal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="finger5_distal_link">
+    <inertial>
+      <origin xyz="-8.79249636643923e-06 0.0187362284337331 0.000261249332231998" rpy="0 0 0" />
+      <mass value="0.00866013629611312" />
+      <inertia ixx="1.21590580873345e-06" ixy="1.83250613835394e-09" ixz="2.94714937744581e-09" iyy="4.3009320862039e-07" iyz="1.76270871291574e-07" izz="1.20013153888653e-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger5_distal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="finger_ivory" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger5_distal_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="finger5_link_link">
+    <inertial>
+      <origin xyz="-0.000137832284729522 0.0200738398943316 0.00356743651833547" rpy="0 0 0" />
+      <mass value="0.00189345523538071" />
+      <inertia ixx="5.46819000215681e-07" ixy="-4.35122375264665e-09" ixz="-2.28389955793497e-09" iyy="6.18241491202954e-08" iyz="-1.36573315574549e-07" izz="5.00061215144107e-07" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger5_link_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="link_metal" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/finger5_link_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="palm_cover_link">
+    <inertial>
+      <origin xyz="-0.00180431694447048 -0.034223857025974 -0.0293137461696129" rpy="0 0 0" />
+      <mass value="0.0590937505200567" />
+      <inertia ixx="7.59126801015134e-05" ixy="7.29754192002448e-06" ixz="2.01123981973448e-06" iyy="0.000114336694720069" iyz="-5.97769510900197e-06" izz="0.000153356541973151" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/palm_cover_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="cover_white" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/palm_cover_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="dorsal_cover_link">
+    <inertial>
+      <origin xyz="-0.000304683272584887 -0.0224476947704361 0.0116854757386511" rpy="0 0 0" />
+      <mass value="0.0406143321027117" />
+      <inertia ixx="3.70075889145596e-05" ixy="2.13103896785896e-06" ixz="-3.25176334068936e-07" iyy="4.61665488028882e-05" iyz="-1.01290226549547e-06" izz="8.18053800410394e-05" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/dorsal_cover_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="cover_grey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/dorsal_cover_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="finger1_abduction_joint" type="revolute">
+    <parent link="palm_link" />
+    <child link="finger1_gimbal_link" />
+    <origin xyz="-0.0275327538 0.0352090402 -0.0155" rpy="0 0 0" />
+    <axis xyz="0 0 1" />
+    <limit lower="-0.3490658503988659" upper="0.3490658503988659" effort="0.25" velocity="1" />
+  </joint>
+  <joint name="finger1_flexion_joint" type="revolute">
+    <parent link="finger1_gimbal_link" />
+    <child link="finger1_proximal_link" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <axis xyz="-1 0 0" />
+    <limit lower="0" upper="1.5009831567151233" effort="0.25" velocity="1" />
+  </joint>
+  <joint name="finger1_distal_joint" type="revolute">
+    <parent link="finger1_proximal_link" />
+    <child link="finger1_distal_link" />
+    <origin xyz="0 0.0519581612 -0.0020855414" rpy="0 0 0" />
+    <axis xyz="-1 0 0" />
+    <limit lower="0" upper="1.3962634015954636" effort="0" velocity="2" />
+  </joint>
+  <joint name="finger1_link_joint" type="revolute">
+    <parent link="finger1_gimbal_link" />
+    <child link="finger1_link_link" />
+    <origin xyz="0 0 -0.006" rpy="0 0 0" />
+    <axis xyz="-1 0 0" />
+    <limit lower="-3.141592653589793" upper="3.141592653589793" effort="0" velocity="2" />
+  </joint>
+  <joint name="finger2_abduction_joint" type="revolute">
+    <parent link="palm_link" />
+    <child link="finger2_gimbal_link" />
+    <origin xyz="0.0052672462 0.0291633185 -0.0155" rpy="0 0 -0.1047197551" />
+    <axis xyz="0 0 1" />
+    <limit lower="-0.3490658503988659" upper="0.3490658503988659" effort="0.25" velocity="1" />
+  </joint>
+  <joint name="finger2_flexion_joint" type="revolute">
+    <parent link="finger2_gimbal_link" />
+    <child link="finger2_proximal_link" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <axis xyz="-1 0 0" />
+    <limit lower="0" upper="1.5009831567151233" effort="0.25" velocity="1" />
+  </joint>
+  <joint name="finger2_distal_joint" type="revolute">
+    <parent link="finger2_proximal_link" />
+    <child link="finger2_distal_link" />
+    <origin xyz="0 0.0519581612 -0.0020855414" rpy="0 0 0" />
+    <axis xyz="-1 0 0" />
+    <limit lower="0" upper="1.3962634015954636" effort="0" velocity="2" />
+  </joint>
+  <joint name="finger2_link_joint" type="revolute">
+    <parent link="finger2_gimbal_link" />
+    <child link="finger2_link_link" />
+    <origin xyz="0 0 -0.006" rpy="0 0 0" />
+    <axis xyz="-1 0 0" />
+    <limit lower="-3.141592653589793" upper="3.141592653589793" effort="0" velocity="2" />
+  </joint>
+  <joint name="finger3_abduction_joint" type="revolute">
+    <parent link="palm_link" />
+    <child link="finger3_gimbal_link" />
+    <origin xyz="0.0374672462 0.0181507871 -0.0155" rpy="0 0 -0.235619449" />
+    <axis xyz="0 0 1" />
+    <limit lower="-0.3490658503988659" upper="0.3490658503988659" effort="0.25" velocity="1" />
+  </joint>
+  <joint name="finger3_flexion_joint" type="revolute">
+    <parent link="finger3_gimbal_link" />
+    <child link="finger3_proximal_link" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <axis xyz="-1 0 0" />
+    <limit lower="0" upper="1.5009831567151233" effort="0.25" velocity="1" />
+  </joint>
+  <joint name="finger3_distal_joint" type="revolute">
+    <parent link="finger3_proximal_link" />
+    <child link="finger3_distal_link" />
+    <origin xyz="0 0.0519581612 -0.0020855414" rpy="0 0 0" />
+    <axis xyz="-1 0 0" />
+    <limit lower="0" upper="1.3962634015954636" effort="0" velocity="2" />
+  </joint>
+  <joint name="finger3_link_joint" type="revolute">
+    <parent link="finger3_gimbal_link" />
+    <child link="finger3_link_link" />
+    <origin xyz="0 0 -0.006" rpy="0 0 0" />
+    <axis xyz="-1 0 0" />
+    <limit lower="-3.141592653589793" upper="3.141592653589793" effort="0" velocity="2" />
+  </joint>
+  <joint name="finger4_abduction_joint" type="revolute">
+    <parent link="palm_link" />
+    <child link="finger4_gimbal_link" />
+    <origin xyz="-0.0280328288 -0.0399941944 -0.0560132226" rpy="-1.5707963268 -0.3490658504 -3.1415926536" />
+    <axis xyz="0 0 1" />
+    <limit lower="-0.3490658503988659" upper="0.3490658503988659" effort="0.25" velocity="1" />
+  </joint>
+  <joint name="finger4_flexion_joint" type="revolute">
+    <parent link="finger4_gimbal_link" />
+    <child link="finger4_proximal_link" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <axis xyz="-1 0 0" />
+    <limit lower="0" upper="1.5009831567151233" effort="0.25" velocity="1" />
+  </joint>
+  <joint name="finger4_distal_joint" type="revolute">
+    <parent link="finger4_proximal_link" />
+    <child link="finger4_distal_link" />
+    <origin xyz="0 0.0519581612 -0.0020855414" rpy="0 0 0" />
+    <axis xyz="-1 0 0" />
+    <limit lower="0" upper="1.3962634015954636" effort="0" velocity="2" />
+  </joint>
+  <joint name="finger4_link_joint" type="revolute">
+    <parent link="finger4_gimbal_link" />
+    <child link="finger4_link_link" />
+    <origin xyz="0 0 -0.006" rpy="0 0 0" />
+    <axis xyz="-1 0 0" />
+    <limit lower="-3.141592653589793" upper="3.141592653589793" effort="0" velocity="2" />
+  </joint>
+  <joint name="finger5_abduction_joint" type="revolute">
+    <parent link="palm_link" />
+    <child link="finger5_gimbal_link" />
+    <origin xyz="0.0219673213 -0.0380763980 -0.0560132226" rpy="-1.5707963268 0.3490658504 3.1415926536" />
+    <axis xyz="0 0 1" />
+    <limit lower="-0.3490658503988659" upper="0.3490658503988659" effort="0.25" velocity="1" />
+  </joint>
+  <joint name="finger5_flexion_joint" type="revolute">
+    <parent link="finger5_gimbal_link" />
+    <child link="finger5_proximal_link" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <axis xyz="-1 0 0" />
+    <limit lower="0" upper="1.5009831567151233" effort="0.25" velocity="1" />
+  </joint>
+  <joint name="finger5_distal_joint" type="revolute">
+    <parent link="finger5_proximal_link" />
+    <child link="finger5_distal_link" />
+    <origin xyz="0 0.0519581612 -0.0020855414" rpy="0 0 0" />
+    <axis xyz="-1 0 0" />
+    <limit lower="0" upper="1.3962634015954636" effort="0" velocity="2" />
+  </joint>
+  <joint name="finger5_link_joint" type="revolute">
+    <parent link="finger5_gimbal_link" />
+    <child link="finger5_link_link" />
+    <origin xyz="0 0 -0.006" rpy="0 0 0" />
+    <axis xyz="-1 0 0" />
+    <limit lower="-3.141592653589793" upper="3.141592653589793" effort="0" velocity="2" />
+  </joint>
+  <joint name="palm_cover_fixed_joint" type="fixed">
+    <parent link="palm_link" />
+    <child link="palm_cover_link" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </joint>
+  <joint name="dorsal_cover_fixed_joint" type="fixed">
+    <parent link="palm_link" />
+    <child link="dorsal_cover_link" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </joint>
+
+  <material name="palm_dark">
+    <color rgba="0.22 0.28 0.34 1" />
+  </material>
+  <material name="gimbal_grey">
+    <color rgba="0.45 0.45 0.45 1" />
+  </material>
+  <material name="finger_ivory">
+    <color rgba="0.9 0.9 0.86 1" />
+  </material>
+  <material name="link_metal">
+    <color rgba="0.55 0.57 0.60 1" />
+  </material>
+  <material name="cover_white">
+    <color rgba="0.95 0.95 0.95 1" />
+  </material>
+  <material name="cover_grey">
+    <color rgba="0.55 0.57 0.60 1" />
+  </material>
+</robot>

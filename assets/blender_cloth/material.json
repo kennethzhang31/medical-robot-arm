@@ -1,0 +1,27 @@
+{
+  "contract": "blender_cloth_fibres_v1",
+  "tile_metres": 0.0104,
+  "yarn_pitch_mm": 0.65,
+  "yarns_per_tile": 16,
+  "texture_size": [
+    512,
+    512
+  ],
+  "uv_metres": [
+    3.26709,
+    2.07803
+  ],
+  "uv_repeats": [
+    314.14326923076925,
+    199.81057692307692
+  ],
+  "source_file": "C:\\Users\\kenne\\repos\\NSTC-Surgical-Instrument-Pick-Place\\exports\\blender_shading_20261026\\shading_applied.blend",
+  "source_hospital_sha256": "46c4c5e5dea230644c52267024972d5152ad8a72d142ae168a4ddf3b6c711c2f",
+  "geometry": "Unchanged points, faces, UVs, transforms; no displacement or subdivision",
+  "material": "Source mean green and crease normal map retained; tiled fibre colour and roughness",
+  "limitations": "Fine fibres soften under minification. Not photo calibrated.",
+  "asset_sha256": {
+    "basecolor.png": "7f4288568bf6bb2cf48db5b7bfe1e50cb75245419fd91cb0be5c8f9afd9e3ee2",
+    "roughness.png": "35482ce1141e7d6696608cac00abe7e182398926a139b889e1865cba3a6e8d25"
+  }
+}

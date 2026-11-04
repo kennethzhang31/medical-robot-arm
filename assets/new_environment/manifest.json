@@ -1,0 +1,74 @@
+{
+  "contract": "new_env_cloth_matched_satin_tools_v2",
+  "source": "new-env\\hospital_isaac_room_v3_2.usdz",
+  "source_sha256": "63963bd4b8b442ae0c586b5f7c896b765e1286282a89892154d32e4cbcfbd47e",
+  "textures": {
+    "green_reference_rgb.png": "5938d05d9a344202b3a350d1edf287c4cb198cfacba4ddd0f3f9f72ca51d271f",
+    "drape_fabric_roughness.png": "fd8b354d60eb971c128632ef701cd4ca24168b52a9c91d532370d22be0c1c140",
+    "drape_creases_normal.png": "958037866571f15e0fb5b3cdb78fc0c42ccbd495e6888c22498142252d2b73ce",
+    "blue_reference_rgb.png": "ad9a975b5f0dde0c0f2ace717b715d986bca5936c5185f73c2cebebad2198c23",
+    "blue_left_fabric_roughness.png": "d766d776be78cfcb6a2bfd4f3b8a2fbc507d80a3dac9740ef3c201003cd68303",
+    "blue_left_creases_normal.png": "da3e458fd620e43fbbaaee3a03ff3d038cc358948dbb3a6ba1c85ec2ff8eb9f0",
+    "blue_right_fabric_roughness.png": "5aed40cff1960da83d303b64e51515a8ecf8257e29cfd71dfb4b64c095c5713e",
+    "blue_right_creases_normal.png": "2a7073fb62e7c75717d1019999b71ae822b43695c38103ec704cceb1870fbbe4"
+  },
+  "tools": [
+    {
+      "name": "Allis_Tissue_Forceps",
+      "source": "new-env\\instruments\\Allis_Tissue_Forceps.usd",
+      "source_sha256": "026e373c3296a6eab1e57c73fc1c7ffec345cbab3be875b405bf538a862da6e5",
+      "asset": "Allis_Tissue_Forceps.usda",
+      "purpose": "static_display_only"
+    },
+    {
+      "name": "Brown_Tissue_Forceps",
+      "source": "new-env\\instruments\\Brown_Tissue_Forceps.usd",
+      "source_sha256": "3580bd878769b73dc227185985a19cbbd0dd22291eee7131e87e68006576bda6",
+      "asset": "Brown_Tissue_Forceps.usda",
+      "purpose": "static_display_only"
+    },
+    {
+      "name": "CrileWood_Needle_Holder_Closed",
+      "source": "new-env\\instruments\\CrileWood_Needle_Holder_Closed.usd",
+      "source_sha256": "3197ff0ef105f88fe81811cad36fec7426a70cf2e21500bbe08a18159624a166",
+      "asset": "CrileWood_Needle_Holder_Closed.usda",
+      "purpose": "static_display_only"
+    },
+    {
+      "name": "Derf_Needle_Holder_Closed",
+      "source": "new-env\\instruments\\Derf_Needle_Holder_Closed.usd",
+      "source_sha256": "f49df32b7174e8903b26603b05ea9e792c17c9a2d5f7341d3de723c58338742d",
+      "asset": "Derf_Needle_Holder_Closed.usda",
+      "purpose": "static_display_only"
+    },
+    {
+      "name": "Mayo_Scissors_Straight",
+      "source": "new-env\\instruments\\Mayo_Scissors_Straight.usd",
+      "source_sha256": "b8bf0605a763cd0e5fe0946a33200148d4859b56ea264756cd8828233942a723",
+      "asset": "Mayo_Scissors_Straight.usda",
+      "purpose": "static_display_only"
+    },
+    {
+      "name": "Metzenbaum_Scissors_Curved",
+      "source": "new-env\\instruments\\Metzenbaum_Scissors_Curved.usd",
+      "source_sha256": "84fa13eab2d05de48c86284698e56fd9718a08893639e5f86f0340060d5614d1",
+      "asset": "Metzenbaum_Scissors_Curved.usda",
+      "purpose": "static_display_only"
+    },
+    {
+      "name": "Ragnell_Retractor",
+      "source": "new-env\\instruments\\Ragnell_Retractor.usd",
+      "source_sha256": "8442176855b815008d04a148825a97b805712e212f9972f417a22268c92c7b9e",
+      "asset": "Ragnell_Retractor.usda",
+      "purpose": "static_display_only"
+    },
+    {
+      "name": "Scalpel_Handle_No3",
+      "source": "new-env\\instruments\\Scalpel_Handle_No3.usd",
+      "source_sha256": "7ef050f1ab9761227f29eda73de91e5e04d524aa4422f5aec9eb69090d74d96f",
+      "asset": "Scalpel_Handle_No3.usda",
+      "purpose": "static_display_only"
+    }
+  ],
+  "robot_present": false
+}

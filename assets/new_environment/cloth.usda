@@ -1,0 +1,335 @@
+#usda 1.0
+(
+    defaultPrim = "Cloth"
+)
+
+def Scope "Cloth"
+{
+    def Material "Drape_Green_Woven_PBR" (
+        apiSchemas = ["ColorSpaceAPI"]
+    )
+    {
+        uniform token colorSpace:name = "lin_rec709_scene"
+        token outputs:surface.connect = </Cloth/Drape_Green_Woven_PBR/Principled_BSDF.outputs:surface>
+        custom string userProperties:blender:data_name = "Drape_Green_Woven_PBR"
+
+        def Shader "Principled_BSDF"
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            float inputs:clearcoat = 0
+            float inputs:clearcoatRoughness = 0.03
+            color3f inputs:diffuseColor.connect = </Cloth/Drape_Green_Woven_PBR/Image_Texture.outputs:rgb>
+            float inputs:ior = 1.45
+            float inputs:metallic = 0
+            normal3f inputs:normal.connect = </Cloth/Drape_Green_Woven_PBR/Image_Texture_002.outputs:rgb>
+            float inputs:opacity = 1
+            float inputs:roughness.connect = </Cloth/Drape_Green_Woven_PBR/Image_Texture_001.outputs:r>
+            float inputs:specular = 0.5
+            token outputs:surface
+        }
+
+        def Shader "Image_Texture" (
+            apiSchemas = ["ColorSpaceAPI"]
+        )
+        {
+            uniform token colorSpace:name = "srgb_rec709_display"
+            uniform token info:id = "UsdUVTexture"
+            float4 inputs:bias = (0.063099496, 0.02668459, 0.03810752, 0)
+            asset inputs:file = @textures/green_reference_rgb.png@
+            float4 inputs:scale = (0.5, 0.5, 0.5, 1)
+            token inputs:sourceColorSpace = "sRGB"
+            float2 inputs:st.connect = </Cloth/Drape_Green_Woven_PBR/RGB_Texture_Scale.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float3 outputs:rgb
+        }
+
+        def Shader "UV_Map"
+        {
+            uniform token info:id = "UsdPrimvarReader_float2"
+            string inputs:varname = "st"
+            float2 outputs:result
+        }
+
+        def Shader "Image_Texture_001" (
+            apiSchemas = ["ColorSpaceAPI"]
+        )
+        {
+            uniform token colorSpace:name = "data"
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @textures/drape_fabric_roughness.png@
+            token inputs:sourceColorSpace = "raw"
+            float2 inputs:st.connect = </Cloth/Drape_Green_Woven_PBR/UV_Map.outputs:result>
+            token inputs:wrapS = "clamp"
+            token inputs:wrapT = "clamp"
+            float outputs:r
+        }
+
+        def Shader "Image_Texture_002" (
+            apiSchemas = ["ColorSpaceAPI"]
+        )
+        {
+            uniform token colorSpace:name = "data"
+            uniform token info:id = "UsdUVTexture"
+            float4 inputs:bias = (-0.45, -0.45, -1, -1)
+            asset inputs:file = @textures/drape_creases_normal.png@
+            float4 inputs:scale = (0.9, 0.9, 2, 2)
+            token inputs:sourceColorSpace = "raw"
+            float2 inputs:st.connect = </Cloth/Drape_Green_Woven_PBR/UV_Map.outputs:result>
+            token inputs:wrapS = "clamp"
+            token inputs:wrapT = "clamp"
+            float3 outputs:rgb
+        }
+
+        def Shader "RGB_Texture_Scale"
+        {
+            uniform token info:id = "UsdTransform2d"
+            float2 inputs:in.connect = </Cloth/Drape_Green_Woven_PBR/UV_Map.outputs:result>
+            float2 inputs:scale = (8.3, 5.225)
+            float2 inputs:translation = (0, 0)
+            float2 outputs:result
+        }
+    }
+
+    def Material "blue_left_PBR" (
+        apiSchemas = ["ColorSpaceAPI"]
+    )
+    {
+        uniform token colorSpace:name = "lin_rec709_scene"
+        token outputs:surface.connect = </Cloth/blue_left_PBR/Principled_BSDF.outputs:surface>
+        custom string userProperties:blender:data_name = "blue_left_PBR"
+
+        def Shader "Principled_BSDF"
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            float inputs:clearcoat = 0
+            float inputs:clearcoatRoughness = 0.03
+            color3f inputs:diffuseColor.connect = </Cloth/blue_left_PBR/Image_Texture.outputs:rgb>
+            float inputs:ior = 1.45
+            float inputs:metallic = 0
+            normal3f inputs:normal.connect = </Cloth/blue_left_PBR/Image_Texture_002.outputs:rgb>
+            float inputs:opacity = 1
+            float inputs:roughness.connect = </Cloth/blue_left_PBR/Image_Texture_001.outputs:r>
+            float inputs:specular = 0.5
+            token outputs:surface
+        }
+
+        def Shader "Image_Texture" (
+            apiSchemas = ["ColorSpaceAPI"]
+        )
+        {
+            uniform token colorSpace:name = "srgb_rec709_display"
+            uniform token info:id = "UsdUVTexture"
+            float4 inputs:bias = (0.04101996, 0.043906663, 0.059377182, 0)
+            asset inputs:file = @textures/blue_reference_rgb.png@
+            float4 inputs:scale = (0.35, 0.35, 0.35, 1)
+            token inputs:sourceColorSpace = "sRGB"
+            float2 inputs:st.connect = </Cloth/blue_left_PBR/RGB_Texture_Scale.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float3 outputs:rgb
+        }
+
+        def Shader "UV_Map"
+        {
+            uniform token info:id = "UsdPrimvarReader_float2"
+            string inputs:varname = "st"
+            float2 outputs:result
+        }
+
+        def Shader "Image_Texture_001" (
+            apiSchemas = ["ColorSpaceAPI"]
+        )
+        {
+            uniform token colorSpace:name = "data"
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @textures/blue_left_fabric_roughness.png@
+            token inputs:sourceColorSpace = "raw"
+            float2 inputs:st.connect = </Cloth/blue_left_PBR/UV_Map.outputs:result>
+            token inputs:wrapS = "clamp"
+            token inputs:wrapT = "clamp"
+            float outputs:r
+        }
+
+        def Shader "Image_Texture_002" (
+            apiSchemas = ["ColorSpaceAPI"]
+        )
+        {
+            uniform token colorSpace:name = "data"
+            uniform token info:id = "UsdUVTexture"
+            float4 inputs:bias = (-0.3, -0.3, -1, -1)
+            asset inputs:file = @textures/blue_left_creases_normal.png@
+            float4 inputs:scale = (0.6, 0.6, 2, 2)
+            token inputs:sourceColorSpace = "raw"
+            float2 inputs:st.connect = </Cloth/blue_left_PBR/UV_Map.outputs:result>
+            token inputs:wrapS = "clamp"
+            token inputs:wrapT = "clamp"
+            float3 outputs:rgb
+        }
+
+        def Shader "RGB_Texture_Scale"
+        {
+            uniform token info:id = "UsdTransform2d"
+            float2 inputs:in.connect = </Cloth/blue_left_PBR/UV_Map.outputs:result>
+            float2 inputs:scale = (0.725, 1.975)
+            float2 inputs:translation = (0.17, 0.29)
+            float2 outputs:result
+        }
+    }
+
+    def Material "Blue_Bound_Edge" (
+        apiSchemas = ["ColorSpaceAPI"]
+    )
+    {
+        uniform token colorSpace:name = "lin_rec709_scene"
+        token outputs:surface.connect = </Cloth/Blue_Bound_Edge/Principled_BSDF.outputs:surface>
+        custom string userProperties:blender:data_name = "Blue_Bound_Edge"
+
+        def Shader "Principled_BSDF"
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            float inputs:clearcoat = 0
+            float inputs:clearcoatRoughness = 0.03
+            color3f inputs:diffuseColor = (0.05087609, 0.10048151, 0.26327342)
+            float inputs:ior = 1.28
+            float inputs:metallic = 0
+            float inputs:opacity = 1
+            float inputs:roughness = 0.96
+            float inputs:specular = 0.5
+            token outputs:surface
+        }
+    }
+
+    def Material "Blue_Stitch_Thread" (
+        apiSchemas = ["ColorSpaceAPI"]
+    )
+    {
+        uniform token colorSpace:name = "lin_rec709_scene"
+        token outputs:surface.connect = </Cloth/Blue_Stitch_Thread/Principled_BSDF.outputs:surface>
+        custom string userProperties:blender:data_name = "Blue_Stitch_Thread"
+
+        def Shader "Principled_BSDF"
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            float inputs:clearcoat = 0
+            float inputs:clearcoatRoughness = 0.03
+            color3f inputs:diffuseColor = (0.10653923, 0.18731667, 0.43387952)
+            float inputs:ior = 1.28
+            float inputs:metallic = 0
+            float inputs:opacity = 1
+            float inputs:roughness = 0.96
+            float inputs:specular = 0.5
+            token outputs:surface
+        }
+    }
+
+    def Material "Blue_Cloth_Cut_Edge" (
+        apiSchemas = ["ColorSpaceAPI"]
+    )
+    {
+        uniform token colorSpace:name = "lin_rec709_scene"
+        token outputs:surface.connect = </Cloth/Blue_Cloth_Cut_Edge/Principled_BSDF.outputs:surface>
+        custom string userProperties:blender:data_name = "Blue_Cloth_Cut_Edge"
+
+        def Shader "Principled_BSDF"
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            float inputs:clearcoat = 0
+            float inputs:clearcoatRoughness = 0.03
+            color3f inputs:diffuseColor = (0.05087609, 0.10048151, 0.27383843)
+            float inputs:ior = 1.28
+            float inputs:metallic = 0
+            float inputs:opacity = 1
+            float inputs:roughness = 0.96
+            float inputs:specular = 0.5
+            token outputs:surface
+        }
+    }
+
+    def Material "blue_right_PBR" (
+        apiSchemas = ["ColorSpaceAPI"]
+    )
+    {
+        uniform token colorSpace:name = "lin_rec709_scene"
+        token outputs:surface.connect = </Cloth/blue_right_PBR/Principled_BSDF.outputs:surface>
+        custom string userProperties:blender:data_name = "blue_right_PBR"
+
+        def Shader "Principled_BSDF"
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            float inputs:clearcoat = 0
+            float inputs:clearcoatRoughness = 0.03
+            color3f inputs:diffuseColor.connect = </Cloth/blue_right_PBR/Image_Texture.outputs:rgb>
+            float inputs:ior = 1.45
+            float inputs:metallic = 0
+            normal3f inputs:normal.connect = </Cloth/blue_right_PBR/Image_Texture_002.outputs:rgb>
+            float inputs:opacity = 1
+            float inputs:roughness.connect = </Cloth/blue_right_PBR/Image_Texture_001.outputs:r>
+            float inputs:specular = 0.5
+            token outputs:surface
+        }
+
+        def Shader "Image_Texture" (
+            apiSchemas = ["ColorSpaceAPI"]
+        )
+        {
+            uniform token colorSpace:name = "srgb_rec709_display"
+            uniform token info:id = "UsdUVTexture"
+            float4 inputs:bias = (0.04101996, 0.043906663, 0.059377182, 0)
+            asset inputs:file = @textures/blue_reference_rgb.png@
+            float4 inputs:scale = (0.35, 0.35, 0.35, 1)
+            token inputs:sourceColorSpace = "sRGB"
+            float2 inputs:st.connect = </Cloth/blue_right_PBR/RGB_Texture_Scale.outputs:result>
+            token inputs:wrapS = "repeat"
+            token inputs:wrapT = "repeat"
+            float3 outputs:rgb
+        }
+
+        def Shader "UV_Map"
+        {
+            uniform token info:id = "UsdPrimvarReader_float2"
+            string inputs:varname = "st"
+            float2 outputs:result
+        }
+
+        def Shader "Image_Texture_001" (
+            apiSchemas = ["ColorSpaceAPI"]
+        )
+        {
+            uniform token colorSpace:name = "data"
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @textures/blue_right_fabric_roughness.png@
+            token inputs:sourceColorSpace = "raw"
+            float2 inputs:st.connect = </Cloth/blue_right_PBR/UV_Map.outputs:result>
+            token inputs:wrapS = "clamp"
+            token inputs:wrapT = "clamp"
+            float outputs:r
+        }
+
+        def Shader "Image_Texture_002" (
+            apiSchemas = ["ColorSpaceAPI"]
+        )
+        {
+            uniform token colorSpace:name = "data"
+            uniform token info:id = "UsdUVTexture"
+            float4 inputs:bias = (-0.3, -0.3, -1, -1)
+            asset inputs:file = @textures/blue_right_creases_normal.png@
+            float4 inputs:scale = (0.6, 0.6, 2, 2)
+            token inputs:sourceColorSpace = "raw"
+            float2 inputs:st.connect = </Cloth/blue_right_PBR/UV_Map.outputs:result>
+            token inputs:wrapS = "clamp"
+            token inputs:wrapT = "clamp"
+            float3 outputs:rgb
+        }
+
+        def Shader "RGB_Texture_Scale"
+        {
+            uniform token info:id = "UsdTransform2d"
+            float2 inputs:in.connect = </Cloth/blue_right_PBR/UV_Map.outputs:result>
+            float2 inputs:scale = (1.65, 1.95)
+            float2 inputs:translation = (0, 0)
+            float2 outputs:result
+        }
+    }
+}
+

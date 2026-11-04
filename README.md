@@ -2,7 +2,11 @@
 
 An IsaacLab recorder for five surgical instruments, standalone detector datasets, and Diffusion Policy (DP).
 
-[Recorder](docs/RECORDER.md) · [Training](training/README.md) · [Inference](docs/INFERENCE.md) · [Branch workflow](docs/BRANCHES.md)
+[Recorder](docs/RECORDER.md) · [Training](training/README.md) · [Inference](docs/INFERENCE.md) · [ASPIRE](docs/ASPIRE.md) · [Branch workflow](docs/BRANCHES.md)
+
+For ASPIRE learning runs, use the [full surgical workflow](docs/ASPIRE_FULL_RUN.md):
+practice, diagnose, save and reuse skills, evaluate K candidates per round, then
+freeze the selected program for held-out evaluation. Outputs go under `logs/`.
 
 ## Pipeline
 
@@ -10,6 +14,10 @@ An IsaacLab recorder for five surgical instruments, standalone detector datasets
 
 One recording feeds Pick DP, Place DP, and a standalone RF-DETR detector.
 RF-DETR is not an input to the current DP implementation.
+
+ASPIRE's visual workflow also uses this detector through a separate inference
+service. See [ASPIRE with RF-DETR](docs/ASPIRE_RFDETR.md) for checkpoint setup
+and box/depth grasp estimation.
 
 **Recording is not training. A successful export does not prove model accuracy.**
 

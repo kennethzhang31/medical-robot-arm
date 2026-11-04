@@ -1,0 +1,23 @@
+{
+  "contract": "usd45_text_wrappers_v1",
+  "assets": [
+    {
+      "source": "assets/love_centered_root_at_center.usd",
+      "source_sha256": "c99af95439b4b63fec7a792aae063f862e821d032b95afc621de22bddbc8d939",
+      "converted": "env/aspire_usd45/love_centered_root_at_center.usda",
+      "converted_sha256": "cb068d86c20a0f753d3c529371dd924041a1b9f9fdc308b26ba7759132581ffc"
+    },
+    {
+      "source": "assets/kelly_root_at_center.usd",
+      "source_sha256": "2406055f5414fe6dd9df96dfa45fd7224919bd0b91035a1dac29ce731108c141",
+      "converted": "env/aspire_usd45/kelly_root_at_center.usda",
+      "converted_sha256": "0602b8ad4e408b0327c109575f04470c85678a80b872926400ea8bdcbb8fe2a6"
+    },
+    {
+      "source": "assets/scalpel_type2_root.usd",
+      "source_sha256": "8a8a0635f21be4b3d384045f61976dd1e14eb0000a51c971e0e84010f06eeb67",
+      "converted": "env/aspire_usd45/scalpel_type2_root.usda",
+      "converted_sha256": "3b88db7557a730b0610df9776b4fa067b3f583aaff1299253cba3665bcfac5a6"
+    }
+  ]
+}

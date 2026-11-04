@@ -1,0 +1,4 @@
+# Install in the existing RF-DETR environment, never Isaac Sim Python.
+-r ../training/rfdetr/requirements.txt
+fastapi==0.115.12
+uvicorn==0.34.2

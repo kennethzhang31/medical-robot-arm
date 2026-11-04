@@ -1,0 +1,29 @@
+#usda 1.0
+(
+    defaultPrim = "LoveRetractorSteel"
+)
+
+def Material "LoveRetractorSteel" (
+    prepend apiSchemas = ["ColorSpaceAPI"]
+)
+{
+    uniform token colorSpace:name = "lin_rec709_scene"
+    token outputs:surface.connect = </LoveRetractorSteel/Principled_BSDF.outputs:surface>
+    custom string userProperties:blender:data_name = "instrumenty.008"
+
+    def Shader "Principled_BSDF"
+    {
+        uniform token info:id = "UsdPreviewSurface"
+        float inputs:clearcoat = 0
+        float inputs:clearcoatRoughness = 0.03
+        color3f inputs:diffuseColor = (0.48, 0.5, 0.52)
+        color3f inputs:emissiveColor = (0, 0, 0)
+        float inputs:ior = 1.5
+        float inputs:metallic = 0.95
+        float inputs:opacity = 1
+        float inputs:roughness = 0.52
+        float inputs:specular = 0.5
+        token outputs:surface
+    }
+}
+

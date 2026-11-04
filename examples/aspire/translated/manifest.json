@@ -1,0 +1,68 @@
+{
+  "contract": "aspire_full_stage_translation_v1",
+  "equivalence": "stage_structure_sensor_adaptation",
+  "physical_validation": "pending",
+  "shared_source_sha256": {
+    "src/recorder/phase4_feedback.py": "ff27a16e79d3796c763206b479a437810443236a6ebddfc2908432974af41b6b",
+    "src/recorder/phase4_approach.py": "3401d86e2c2ab22257d9179c70d2490afb2841d94829fce07e0b35e1b2249db2",
+    "src/recorder/phase4_tray_slots.py": "c34cee5f85b7de6d658b331dec60cc0e931519ea92aaa14f61fc4a6dd8eae709"
+  },
+  "template_sha256": "bcbfdd1beaa3ccb7cd7ccd239790e101d09181d1f7b0bbdb61605ebdd10149ea",
+  "skills": [
+    {
+      "target": "scalpel",
+      "source": "backends/phase3_grid_split_scalpel_recorder.py",
+      "source_sha256": "8bb616eec74399fdc8d1d0464b562ba1b76ab1a9077a9556b5d937a4e3cb4044",
+      "skill": "examples/aspire/translated/scalpel.py",
+      "skill_sha256": "92828f142041e9b04ffd09a928a6f96e435c68ce25b873ae75e46740ef04413f",
+      "protocols": {
+        "rfdetr": "configs/aspire/translated/scalpel-rfdetr.json",
+        "sam3": "configs/aspire/translated/scalpel-sam3.json"
+      }
+    },
+    {
+      "target": "scissor",
+      "source": "backends/phase3_grid_split_scissor_recorder.py",
+      "source_sha256": "1162bfdf7202e69a60ddad2905b706812b2bc6a526045bba78112546edd593f9",
+      "skill": "examples/aspire/translated/scissor.py",
+      "skill_sha256": "1e1e126764d3caf440804849b69e5adba7e9dc94f4b957b043d1b42e3b231144",
+      "protocols": {
+        "rfdetr": "configs/aspire/translated/scissor-rfdetr.json",
+        "sam3": "configs/aspire/translated/scissor-sam3.json"
+      }
+    },
+    {
+      "target": "love_retractor",
+      "source": "backends/phase3_grid_split_love_retractor_recorder.py",
+      "source_sha256": "fdb3345c8086abca8908f58ad74a2793f1713cd191c9ac6bd7ab6f9137c09252",
+      "skill": "examples/aspire/translated/love_retractor.py",
+      "skill_sha256": "bf48e47ce5d86a2a9a8d2ce1175ac7deb26404077fa84c09be2b0ea4c1c46e51",
+      "protocols": {
+        "rfdetr": "configs/aspire/translated/love_retractor-rfdetr.json",
+        "sam3": "configs/aspire/translated/love_retractor-sam3.json"
+      }
+    },
+    {
+      "target": "kelly",
+      "source": "backends/phase3_grid_split_kelly_recorder.py",
+      "source_sha256": "87e4668aecf1ce2906ba650d556169399fb959f9ffcb13f297fceab6553ec33a",
+      "skill": "examples/aspire/translated/kelly.py",
+      "skill_sha256": "1befe32595973f85abe60e24c235f2476fa0b07fad4fdd03c52b1c273536ba36",
+      "protocols": {
+        "rfdetr": "configs/aspire/translated/kelly-rfdetr.json",
+        "sam3": "configs/aspire/translated/kelly-sam3.json"
+      }
+    },
+    {
+      "target": "scalpel_type2",
+      "source": "backends/phase3_grid_split_scalpel_type2_recorder.py",
+      "source_sha256": "a6f86a96f46bf75c2ed607c68f8911b579cee222967321eca746e173b8a59aa7",
+      "skill": "examples/aspire/translated/scalpel_type2.py",
+      "skill_sha256": "600f8077db17f5433df72b7f0651a6b6429668a2bdaf1905a0f58390b3dbde53",
+      "protocols": {
+        "rfdetr": "configs/aspire/translated/scalpel_type2-rfdetr.json",
+        "sam3": "configs/aspire/translated/scalpel_type2-sam3.json"
+      }
+    }
+  ]
+}

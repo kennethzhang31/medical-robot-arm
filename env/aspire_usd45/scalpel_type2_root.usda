@@ -1,0 +1,34 @@
+#usda 1.0
+(
+    defaultPrim = "Object"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "Object" (
+    prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+)
+{
+    float physics:mass = 0.03
+
+    def Xform "Visual" (
+        prepend references = @../../assets/scalpel_type2.usd@
+    )
+    {
+        quatf xformOp:orient = (0.70710677, 0, 0.70710677, 0)
+        double3 xformOp:translate = (-6.722174667753283, -3.5043082222130373e-7, -19.63918137550353)
+        uniform token[] xformOpOrder = ["xformOp:orient", "xformOp:translate"]
+    }
+
+    def Cube "Collider" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double size = 1
+        token visibility = "invisible"
+        float3 xformOp:scale = (21.006927, 0.39601025, 1.3155125)
+        double3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+}
+

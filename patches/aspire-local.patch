@@ -1,0 +1,112 @@
+diff --git a/aspire/sim/cap/envs/trial.py b/aspire/sim/cap/envs/trial.py
+index 203c44a..4b2ce3d 100644
+--- a/aspire/sim/cap/envs/trial.py
++++ b/aspire/sim/cap/envs/trial.py
+@@ -659,9 +659,10 @@ def _run_single_trial(
+     # Reset the SIGALRM timer AFTER env.reset() so the timeout only covers
+     # actual task execution, not scene loading / cuRobo JIT compilation.
+     import signal
+-    remaining = signal.alarm(0)  # cancel current alarm
+-    if remaining > 0:
+-        signal.alarm(1000)  # restart fresh 1000s from now
++    if hasattr(signal, "alarm"):
++        remaining = signal.alarm(0)  # cancel current alarm
++        if remaining > 0:
++            signal.alarm(1000)  # restart fresh 1000s from now
+     obs["full_prompt"] = copy.deepcopy(obs["full_prompt"])
+     _patch_libero_goal(env, obs)
+ 
+@@ -788,7 +789,8 @@ def _run_single_trial(
+     if partial_artifacts is not None:
+         partial_artifacts["recording_frames"] = recording_frames
+ 
+-    while code_block_idx < len(code_blocks) and code_block_idx <= MULTITURN_LIMIT:
++    max_code_blocks = config.get("max_code_blocks", MULTITURN_LIMIT + 1)
++    while code_block_idx < len(code_blocks) and code_block_idx < max_code_blocks:
+         code = code_blocks[code_block_idx]
+         code_block_idx += 1
+ 
+@@ -811,6 +813,10 @@ def _run_single_trial(
+ 
+         obs = obs_next
+ 
++        # Opt-in bounded trials avoid generating code that cannot be executed.
++        if config.get("stop_on_terminal", False) and (terminated or truncated or code_block_idx >= max_code_blocks):
++            break
++
+         # Multi-turn decision
+         if multi_turn_prompt:
+             if "terminated episode" in info_step["stderr"]:
+diff --git a/aspire/sim/cap/llm/client.py b/aspire/sim/cap/llm/client.py
+index 692568b..5821677 100644
+--- a/aspire/sim/cap/llm/client.py
++++ b/aspire/sim/cap/llm/client.py
+@@ -103,6 +103,8 @@ class ModelQueryArgs:
+     max_tokens: int = 4096
+     reasoning_effort: str = "medium"
+     debug: bool = False
++    ensemble_size: int = 9
++    request_timeout_s: float = 500.
+ 
+ 
+ def collapse_text_image_inputs(messages: list[dict]) -> list[dict]:
+@@ -251,7 +253,7 @@ def query_model(args: "LaunchArgs | ModelQueryArgs", prompt: list[dict]) -> str:
+ 
+     # keep calling until it works
+     response = requests.post(
+-        server_url, headers=headers, data=json.dumps(payload), timeout=500
++        server_url, headers=headers, data=json.dumps(payload), timeout=getattr(args, "request_timeout_s", 500.)
+     )
+     retry = 1
+     while response.status_code in [404, 429, 500, 502, 503, 504]:
+@@ -259,7 +261,7 @@ def query_model(args: "LaunchArgs | ModelQueryArgs", prompt: list[dict]) -> str:
+         print(f"Retry {retry}. Model query failed with status code {response.status_code}. Error: {response.text}. Retrying in {sleep_time:.1f} seconds...")
+         time.sleep(sleep_time)
+         response = requests.post(
+-            server_url, headers=headers, data=json.dumps(payload), timeout=500
++            server_url, headers=headers, data=json.dumps(payload), timeout=getattr(args, "request_timeout_s", 500.)
+         )
+         retry += 1
+ 
+@@ -596,7 +598,7 @@ def query_single_model_ensemble(
+     model: str,
+     is_multiturn = False,
+ ) -> dict[str, Any]:
+-    """Query the same model 9 times (with temperatures 0.1 to 0.9) and synthesize final output.
++    """Query the same model at several temperatures and synthesize final output.
+ 
+     Args:
+         args: Configuration with server URL and model settings
+@@ -615,6 +617,7 @@ def query_single_model_ensemble(
+             temperature=temp,
+             max_tokens=args.max_tokens,
+             reasoning_effort=getattr(args, "reasoning_effort", "medium"),
++            request_timeout_s=getattr(args, "request_timeout_s", 500.),
+         )
+         try:
+             result = query_model(query_args, copy.deepcopy(prompt))
+@@ -624,10 +627,13 @@ def query_single_model_ensemble(
+             print(f"[Single Model Ensemble] {model} temp={temp} FAILED: {error_msg}")
+             return {"model": model, "temp": temp, "content": error_msg, "ok": False}
+ 
+-    # Query same model with 9 different temperatures (0.1 to 0.9)
+-    temperatures = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
++    # Preserve the original nine-temperature default; expose bounded ensemble size.
++    ensemble_size = getattr(args, "ensemble_size", 9)
++    if type(ensemble_size) is not int or not 1 <= ensemble_size <= 16:
++        raise ValueError("ensemble_size must be 1..16")
++    temperatures = [0.1 + 0.8*i/max(1, ensemble_size-1) for i in range(ensemble_size)]
+     responses = []
+-    with concurrent.futures.ThreadPoolExecutor(max_workers=9) as executor:
++    with concurrent.futures.ThreadPoolExecutor(max_workers=ensemble_size) as executor:
+         futures = {executor.submit(query_single, t): t for t in temperatures}
+         for future in concurrent.futures.as_completed(futures):
+             resp = future.result()
+@@ -729,6 +735,7 @@ def query_single_model_ensemble(
+         api_key=args.api_key,
+         temperature=0.2,
+         max_tokens=args.max_tokens,
++        request_timeout_s=getattr(args, "request_timeout_s", 500.),
+     )
+     final = query_model(synth_args, synthesis_prompt)
+ 

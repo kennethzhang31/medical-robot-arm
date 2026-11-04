@@ -1,0 +1,36 @@
+#usda 1.0
+(
+    defaultPrim = "Object"
+)
+
+def Xform "Object" (
+    prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+)
+{
+    float physics:mass = 0.12
+
+    def Xform "Geom" (
+        prepend references = @../../assets/love_centered.usd@
+    )
+    {
+        double3 xformOp:translate = (-168.9470141200155, -1063.2115055350714, -249.51975463972354)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        over "center"
+        {
+            over "Cylinder_074_59"
+            {
+                over "Object_125"
+                {
+                    over "Object_62" (
+                        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+                    )
+                    {
+                        uniform token physics:approximation = "convexHull"
+                    }
+                }
+            }
+        }
+    }
+}
+

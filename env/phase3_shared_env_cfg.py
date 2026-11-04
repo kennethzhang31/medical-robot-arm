@@ -117,7 +117,7 @@ INSTRUMENTS = {
     "scalpel_type2": AssetSpec("scalpel_type2_root.usd", "ScalpelType2", (0.00715074,) * 3, 0.10, (0.62, 0.30, 0.006)),
 }
 
-from env.instrument_materials import INSTRUMENT_MATERIAL_OVERRIDES
+from env.instrument_materials import INSTRUMENT_MATERIAL_OVERRIDES, spawn_satin_instrument
 
 # Optional static environment assets. Disabled by default to preserve the
 # original dataset scene. Add their names to RecorderEnvRequest.environment.
@@ -344,6 +344,7 @@ def apply_shared_env_cfg(env_cfg, request: RecorderEnvRequest, *, camera_width: 
             prim_path=f"{{ENV_REGEX_NS}}/{prim_name or spec.prim_name}",
             spawn=sim_utils.UsdFileCfg(
                 usd_path=str(ASSET_DIR / spec.usd),
+                func=spawn_satin_instrument,
                 scale=spec.scale,
                 semantic_tags=[("class", name)],
                 visual_material=(

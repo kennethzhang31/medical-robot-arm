@@ -29,14 +29,16 @@ def sample_background(seed):
     palette={'surgical_green':(.045,.24,.13),'deep_green':(.035,.18,.10),'teal_green':(.045,.25,.19)}
     name=rng.choice(tuple(palette))
     return dict(profile=name,color=[min(1.,v*rng.uniform(.8,1.2)) for v in palette[name]],
-                roughness=rng.uniform(.65,.95),physical_scale=1.,
+                roughness=rng.uniform(.76,.88),physical_scale=1.,
                 scope='selected_table_drape_only; geometry and instrument scale unchanged')
 
 
-def apply_background(stage, layout, config):
-    """Tint only the selected table drape. Never alter collision or instrument materials."""
+def apply_background(stage, layout, config, *, root=None):
+    """Tint the selected drape's Blender fibre material without changing its mesh."""
     from pxr import Usd, UsdGeom, UsdShade, Sdf, Gf
-    root=stage.GetPrimAtPath('/World/envs/env_0/HospitalRoom/Furniture/'+layout['selected_table'])
+    from env.cloth_materials import CONTRACT, apply_fibre_textures, apply_microfiber_surface
+    prefix = str(root.GetPath()) if root is not None else '/World/envs/env_0/HospitalRoom'
+    root=stage.GetPrimAtPath(prefix+'/Furniture/'+layout['selected_table'])
     if not root.IsValid(): raise RuntimeError('Missing selected table for appearance variation')
     # Referenced table visuals contain nested instances; make ONLY the drape
     # branch editable, not the hospital or instrument assets.
@@ -48,16 +50,43 @@ def apply_background(stage, layout, config):
         instance.SetInstanceable(False)
     meshes=[p for p in Usd.PrimRange(root) if p.IsA(UsdGeom.Mesh) and 'Green_Drape' in p.GetName()]
     if not meshes: raise RuntimeError('No editable table drape mesh; refusing silent randomization omission')
-    material=UsdShade.Material.Define(stage,'/World/P4RandomizedDrape')
-    shader=UsdShade.Shader.Define(stage,'/World/P4RandomizedDrape/Shader')
-    shader.CreateIdAttr('UsdPreviewSurface')
-    shader.CreateInput('diffuseColor',Sdf.ValueTypeNames.Color3f).Set(Gf.Vec3f(*config['color']))
-    shader.CreateInput('roughness',Sdf.ValueTypeNames.Float).Set(config['roughness'])
-    shader.CreateOutput('surface', Sdf.ValueTypeNames.Token)
-    material.CreateSurfaceOutput().ConnectToSource(shader.ConnectableAPI(),'surface')
+    materials = set()
     for mesh in meshes:
-        UsdShade.MaterialBindingAPI.Apply(mesh).Bind(material, bindingStrength=UsdShade.Tokens.strongerThanDescendants)
+        material, _ = UsdShade.MaterialBindingAPI(mesh).ComputeBoundMaterial()
+        if not material:
+            raise RuntimeError('Missing authored drape material: '+str(mesh.GetPath()))
+        materials.add(material.GetPath())
+    for path in materials:
+        shader, _, _ = UsdShade.Material(stage.GetPrimAtPath(path)).ComputeSurfaceSource()
+        if not shader or shader.GetIdAttr().Get() != 'UsdPreviewSurface':
+            raise RuntimeError('Expected textured USD drape surface: '+str(path))
+        if layout.get('cloth_material') == 'new_env_reference_cloth_v1':
+            from env.new_environment import vary_cloth
+            config['material_contract'] = vary_cloth(shader, config)
+            continue
+        cloth = apply_fibre_textures(shader)
+        # Absolute texture transforms prevent tint/roughness accumulating each episode.
+        for name in ('diffuseColor', 'roughness'):
+            source = shader.GetInput(name).GetConnectedSource()
+            if not source or source[0].GetPrim().GetAttribute('info:id').Get() != 'UsdUVTexture':
+                raise RuntimeError('Missing drape texture: '+name)
+            texture = UsdShade.Shader(source[0].GetPrim())
+            if name == 'diffuseColor':
+                factors = [v / base for v, base in zip(config['color'], (.045, .24, .13))]
+                scale, bias = Gf.Vec4f(*factors, 1.), Gf.Vec4f(0.)
+            else:
+                weight = cloth['roughness_weight']
+                scale = Gf.Vec4f(weight, weight, weight, 1.)
+                bias = Gf.Vec4f(*([config['roughness'] - weight * cloth['roughness_mean']] * 3), 0.)
+            texture.CreateInput('scale', Sdf.ValueTypeNames.Float4).Set(scale)
+            texture.CreateInput('bias', Sdf.ValueTypeNames.Float4).Set(bias)
+        shader.CreateInput('metallic', Sdf.ValueTypeNames.Float).Set(0.)
+        shader.CreateInput('clearcoat', Sdf.ValueTypeNames.Float).Set(0.)
+        shader.CreateInput('ior', Sdf.ValueTypeNames.Float).Set(1.35)
+        shader.CreateInput('specular', Sdf.ValueTypeNames.Float).Set(.35)
+        apply_microfiber_surface(shader, cloth, config)
     config['mesh_paths']=[str(p.GetPath()) for p in meshes]
+    config.setdefault('material_contract', CONTRACT)
 
 
 def apply_episode_lighting(env, ns):
